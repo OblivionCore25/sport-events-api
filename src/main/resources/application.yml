@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+# Configurable list of valid sport types.
+# Add or remove entries here without any code changes.
+sport:
+  types:
+    - FOOTBALL
+    - HOCKEY
+    - TENNIS
+    - BASKETBALL
+    - BASEBALL
+    - RUGBY
+    - CRICKET
