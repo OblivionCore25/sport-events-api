@@ -7,8 +7,10 @@ import com.entain.sportevents.dto.UpdateStatusRequest;
 import com.entain.sportevents.model.EventStatus;
 import com.entain.sportevents.service.SportEventService;
 import com.entain.sportevents.sse.SseEmitterRegistry;
+import com.entain.sportevents.validation.ValidSportType;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +40,7 @@ import java.util.UUID;
  *   <li>{@code GET    /api/sports}             – List configured sport types</li>
  * </ul>
  */
+@Validated
 @RestController
 @RequestMapping("/api")
 public class SportEventController {
@@ -85,7 +88,7 @@ public class SportEventController {
     @GetMapping("/events")
     public List<EventResponse> listEvents(
             @RequestParam(required = false) EventStatus status,
-            @RequestParam(required = false) String sport) {
+            @RequestParam(required = false) @ValidSportType(required = false) String sport) {
         return sportEventService.findAll(status, sport);
     }
 

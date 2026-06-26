@@ -55,4 +55,12 @@ public class InMemoryEventRepository {
                 .filter(e -> sport == null || e.getSport().equalsIgnoreCase(sport))
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Removes all events from the store.
+     * Intended for use in integration tests to ensure a clean state between test runs.
+     */
+    public void clearAll() {
+        store.clear();
+    }
 }

@@ -4,6 +4,7 @@ import com.entain.sportevents.dto.CreateEventRequest;
 import com.entain.sportevents.dto.EventResponse;
 import com.entain.sportevents.dto.UpdateStatusRequest;
 import com.entain.sportevents.model.EventStatus;
+import com.entain.sportevents.repository.InMemoryEventRepository;
 import com.entain.sportevents.service.SportEventService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -42,10 +43,17 @@ class SportEventControllerTest {
         @Autowired
         private SportEventService sportEventService;
 
+        @Autowired
+        private InMemoryEventRepository repository;
+
         private ObjectMapper objectMapper;
 
         @BeforeEach
         void setUp() {
+                // Clear the store before each test so tests are fully isolated and
+                // results are deterministic regardless of execution order.
+                repository.clearAll();
+
                 objectMapper = new ObjectMapper();
                 objectMapper.registerModule(new JavaTimeModule());
                 objectMapper.disable(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
