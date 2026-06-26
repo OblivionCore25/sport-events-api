@@ -13,9 +13,12 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * Registry that manages active SSE connections and broadcasts event updates to all subscribers.
+ * Registry that manages active SSE connections and broadcasts event updates to
+ * all subscribers.
  *
- * <p>Uses a {@link CopyOnWriteArrayList} so that iterating for broadcast and removing
+ * <p>
+ * Uses a {@link CopyOnWriteArrayList} so that iterating for broadcast and
+ * removing
  * completed/timed-out emitters are both thread-safe without external locking.
  */
 @Component
@@ -72,8 +75,7 @@ public class SseEmitterRegistry {
                 emitter.send(
                         SseEmitter.event()
                                 .name("event-update")
-                                .data(objectMapper.writeValueAsString(event))
-                );
+                                .data(objectMapper.writeValueAsString(event)));
             } catch (IOException e) {
                 deadEmitters.add(emitter);
                 log.debug("Removing dead SSE emitter: {}", e.getMessage());
@@ -84,7 +86,10 @@ public class SseEmitterRegistry {
         log.debug("Broadcasted update for event {}. Active subscribers: {}", event.getId(), emitters.size());
     }
 
-    /** Returns the number of currently active SSE subscribers (useful for monitoring). */
+    /**
+     * Returns the number of currently active SSE subscribers (useful for
+     * monitoring).
+     */
     public int subscriberCount() {
         return emitters.size();
     }
