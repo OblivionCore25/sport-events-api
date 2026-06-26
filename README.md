@@ -31,6 +31,7 @@
 - [Configuration](#-configuration)
 - [Running Tests](#-running-tests)
 - [Error Handling](#-error-handling)
+- [AI Assistance Disclosure](#-ai-assistance-disclosure)
 - [Contributing](#-contributing)
 
 ---
@@ -490,6 +491,40 @@ mvn test
 ## 📄 License
 
 Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information.
+
+---
+
+## 🤖 AI Assistance Disclosure
+
+This project was built with the assistance of **Antigravity** (an AI coding assistant by Google DeepMind), used as a pair-programming tool throughout the development session.
+
+### How it was used
+
+| Area | AI involvement | Developer involvement |
+|------|---------------|----------------------|
+| **Architecture** | Proposed the layered structure (controller → service → repository → model) | Reviewed, questioned, and approved each layer |
+| **Sport type design** | Suggested both enum and config-file options with trade-off analysis | Decided to use `application.yml` + `@ConfigurationProperties` after evaluating the options |
+| **Code generation** | Generated initial implementations for all classes | Reviewed all generated code, reformatted to personal style, removed unused imports, and refactored test structure |
+| **Status transition rules** | Implemented the `validateTransition()` logic based on the spec | Verified the logic against each rule in the requirements |
+| **SSE implementation** | Implemented `SseEmitterRegistry` with `CopyOnWriteArrayList` | Understood the design, asked follow-up questions on production trade-offs |
+| **Tests** | Generated unit and integration test scaffolding | Ran the tests, reviewed coverage, and independently understood each assertion |
+| **Pre-submission review** | Identified gaps (missing Maven wrapper, LICENSE, test isolation, filter inconsistency) | Applied and validated each fix |
+| **README** | Drafted the documentation | Reviewed content for accuracy |
+
+### What the developer directed
+
+- All design decisions were made after discussion — the AI presented options, the developer chose
+- The decision to use SSE over WebSocket was evaluated and consciously chosen for this use case
+- Reformatting of test files and removal of unused imports were done independently
+- The developer understands and can explain every class, method, and design decision in the codebase
+
+### References and documentation consulted
+
+- [Spring Boot 3.3 Reference Documentation](https://docs.spring.io/spring-boot/docs/3.3.1/reference/html/)
+- [Spring MVC — SseEmitter](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/servlet/mvc/method/annotation/SseEmitter.html)
+- [Jakarta Bean Validation](https://jakarta.ee/specifications/bean-validation/3.0/)
+- [Lombok Project](https://projectlombok.org/)
+- [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/)
 
 ---
 
